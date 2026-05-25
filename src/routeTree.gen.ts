@@ -14,10 +14,17 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppSuiviRouteImport } from './routes/_app.suivi'
+import { Route as AppProfilRouteImport } from './routes/_app.profil'
+import { Route as AppPlanificationRouteImport } from './routes/_app.planification'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppProductionsIndexRouteImport } from './routes/_app.productions.index'
 import { Route as AppEmissionsIndexRouteImport } from './routes/_app.emissions.index'
+import { Route as AppDemandesMmIndexRouteImport } from './routes/_app.demandes-mm.index'
+import { Route as AppProductionsIdRouteImport } from './routes/_app.productions.$id'
 import { Route as AppEmissionsNewRouteImport } from './routes/_app.emissions.new'
 import { Route as AppEmissionsIdRouteImport } from './routes/_app.emissions.$id'
+import { Route as AppDemandesMmNewRouteImport } from './routes/_app.demandes-mm.new'
 
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
@@ -43,14 +50,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSuiviRoute = AppSuiviRouteImport.update({
+  id: '/suivi',
+  path: '/suivi',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfilRoute = AppProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlanificationRoute = AppPlanificationRouteImport.update({
+  id: '/planification',
+  path: '/planification',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppProductionsIndexRoute = AppProductionsIndexRouteImport.update({
+  id: '/productions/',
+  path: '/productions/',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEmissionsIndexRoute = AppEmissionsIndexRouteImport.update({
   id: '/emissions/',
   path: '/emissions/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDemandesMmIndexRoute = AppDemandesMmIndexRouteImport.update({
+  id: '/demandes-mm/',
+  path: '/demandes-mm/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProductionsIdRoute = AppProductionsIdRouteImport.update({
+  id: '/productions/$id',
+  path: '/productions/$id',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEmissionsNewRoute = AppEmissionsNewRouteImport.update({
@@ -63,6 +100,11 @@ const AppEmissionsIdRoute = AppEmissionsIdRouteImport.update({
   path: '/emissions/$id',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDemandesMmNewRoute = AppDemandesMmNewRouteImport.update({
+  id: '/demandes-mm/new',
+  path: '/demandes-mm/new',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -70,9 +112,16 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
+  '/planification': typeof AppPlanificationRoute
+  '/profil': typeof AppProfilRoute
+  '/suivi': typeof AppSuiviRoute
+  '/demandes-mm/new': typeof AppDemandesMmNewRoute
   '/emissions/$id': typeof AppEmissionsIdRoute
   '/emissions/new': typeof AppEmissionsNewRoute
+  '/productions/$id': typeof AppProductionsIdRoute
+  '/demandes-mm/': typeof AppDemandesMmIndexRoute
   '/emissions/': typeof AppEmissionsIndexRoute
+  '/productions/': typeof AppProductionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -80,9 +129,16 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
+  '/planification': typeof AppPlanificationRoute
+  '/profil': typeof AppProfilRoute
+  '/suivi': typeof AppSuiviRoute
+  '/demandes-mm/new': typeof AppDemandesMmNewRoute
   '/emissions/$id': typeof AppEmissionsIdRoute
   '/emissions/new': typeof AppEmissionsNewRoute
+  '/productions/$id': typeof AppProductionsIdRoute
+  '/demandes-mm': typeof AppDemandesMmIndexRoute
   '/emissions': typeof AppEmissionsIndexRoute
+  '/productions': typeof AppProductionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -92,9 +148,16 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/planification': typeof AppPlanificationRoute
+  '/_app/profil': typeof AppProfilRoute
+  '/_app/suivi': typeof AppSuiviRoute
+  '/_app/demandes-mm/new': typeof AppDemandesMmNewRoute
   '/_app/emissions/$id': typeof AppEmissionsIdRoute
   '/_app/emissions/new': typeof AppEmissionsNewRoute
+  '/_app/productions/$id': typeof AppProductionsIdRoute
+  '/_app/demandes-mm/': typeof AppDemandesMmIndexRoute
   '/_app/emissions/': typeof AppEmissionsIndexRoute
+  '/_app/productions/': typeof AppProductionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -104,9 +167,16 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/dashboard'
+    | '/planification'
+    | '/profil'
+    | '/suivi'
+    | '/demandes-mm/new'
     | '/emissions/$id'
     | '/emissions/new'
+    | '/productions/$id'
+    | '/demandes-mm/'
     | '/emissions/'
+    | '/productions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -114,9 +184,16 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/dashboard'
+    | '/planification'
+    | '/profil'
+    | '/suivi'
+    | '/demandes-mm/new'
     | '/emissions/$id'
     | '/emissions/new'
+    | '/productions/$id'
+    | '/demandes-mm'
     | '/emissions'
+    | '/productions'
   id:
     | '__root__'
     | '/'
@@ -125,9 +202,16 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/_app/dashboard'
+    | '/_app/planification'
+    | '/_app/profil'
+    | '/_app/suivi'
+    | '/_app/demandes-mm/new'
     | '/_app/emissions/$id'
     | '/_app/emissions/new'
+    | '/_app/productions/$id'
+    | '/_app/demandes-mm/'
     | '/_app/emissions/'
+    | '/_app/productions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -175,6 +259,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/suivi': {
+      id: '/_app/suivi'
+      path: '/suivi'
+      fullPath: '/suivi'
+      preLoaderRoute: typeof AppSuiviRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profil': {
+      id: '/_app/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof AppProfilRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/planification': {
+      id: '/_app/planification'
+      path: '/planification'
+      fullPath: '/planification'
+      preLoaderRoute: typeof AppPlanificationRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -182,11 +287,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/productions/': {
+      id: '/_app/productions/'
+      path: '/productions'
+      fullPath: '/productions/'
+      preLoaderRoute: typeof AppProductionsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/emissions/': {
       id: '/_app/emissions/'
       path: '/emissions'
       fullPath: '/emissions/'
       preLoaderRoute: typeof AppEmissionsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/demandes-mm/': {
+      id: '/_app/demandes-mm/'
+      path: '/demandes-mm'
+      fullPath: '/demandes-mm/'
+      preLoaderRoute: typeof AppDemandesMmIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/productions/$id': {
+      id: '/_app/productions/$id'
+      path: '/productions/$id'
+      fullPath: '/productions/$id'
+      preLoaderRoute: typeof AppProductionsIdRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/emissions/new': {
@@ -203,21 +329,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEmissionsIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/demandes-mm/new': {
+      id: '/_app/demandes-mm/new'
+      path: '/demandes-mm/new'
+      fullPath: '/demandes-mm/new'
+      preLoaderRoute: typeof AppDemandesMmNewRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppPlanificationRoute: typeof AppPlanificationRoute
+  AppProfilRoute: typeof AppProfilRoute
+  AppSuiviRoute: typeof AppSuiviRoute
+  AppDemandesMmNewRoute: typeof AppDemandesMmNewRoute
   AppEmissionsIdRoute: typeof AppEmissionsIdRoute
   AppEmissionsNewRoute: typeof AppEmissionsNewRoute
+  AppProductionsIdRoute: typeof AppProductionsIdRoute
+  AppDemandesMmIndexRoute: typeof AppDemandesMmIndexRoute
   AppEmissionsIndexRoute: typeof AppEmissionsIndexRoute
+  AppProductionsIndexRoute: typeof AppProductionsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppPlanificationRoute: AppPlanificationRoute,
+  AppProfilRoute: AppProfilRoute,
+  AppSuiviRoute: AppSuiviRoute,
+  AppDemandesMmNewRoute: AppDemandesMmNewRoute,
   AppEmissionsIdRoute: AppEmissionsIdRoute,
   AppEmissionsNewRoute: AppEmissionsNewRoute,
+  AppProductionsIdRoute: AppProductionsIdRoute,
+  AppDemandesMmIndexRoute: AppDemandesMmIndexRoute,
   AppEmissionsIndexRoute: AppEmissionsIndexRoute,
+  AppProductionsIndexRoute: AppProductionsIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
