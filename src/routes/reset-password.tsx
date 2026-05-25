@@ -41,15 +41,33 @@ function ResetPasswordPage() {
       <form onSubmit={submit} className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="temp">Mot de passe temporaire</Label>
-          <Input id="temp" type="password" value={temp} onChange={(e) => setTemp(e.target.value)} className="h-11" />
+          <Input
+            id="temp"
+            type="password"
+            value={temp}
+            onChange={(e) => setTemp(e.target.value)}
+            className="h-11"
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="pwd">Nouveau mot de passe</Label>
-          <Input id="pwd" type="password" value={pwd} onChange={(e) => setPwd(e.target.value)} className="h-11" />
+          <Input
+            id="pwd"
+            type="password"
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            className="h-11"
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirm">Confirmation</Label>
-          <Input id="confirm" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-11" />
+          <Input
+            id="confirm"
+            type="password"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            className="h-11"
+          />
           {confirm && pwd !== confirm && (
             <p className="text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
           )}
@@ -63,7 +81,10 @@ function ResetPasswordPage() {
             {RULES.map((r) => {
               const ok = r.test(pwd);
               return (
-                <li key={r.label} className={`flex items-center gap-2 text-xs ${ok ? "text-[color:oklch(0.4_0.15_145)]" : "text-muted-foreground"}`}>
+                <li
+                  key={r.label}
+                  className={`flex items-center gap-2 text-xs ${ok ? "text-[color:oklch(0.4_0.15_145)]" : "text-muted-foreground"}`}
+                >
                   <Check className={`h-3.5 w-3.5 ${ok ? "" : "opacity-30"}`} /> {r.label}
                 </li>
               );

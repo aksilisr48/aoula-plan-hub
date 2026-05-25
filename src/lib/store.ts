@@ -46,8 +46,18 @@ export interface Emission {
 export type Phase = "Pré-production" | "Production" | "Post-production" | "Diffusion";
 
 export const PHASE_TEMPLATE: Record<Phase, string[]> = {
-  "Pré-production": ["Brief initial", "Préparation conducteur", "Réunion coordination", "Validation contenu"],
-  Production: ["Déplacement", "Installation technique", "Tournage / Captation", "Coordination plateau"],
+  "Pré-production": [
+    "Brief initial",
+    "Préparation conducteur",
+    "Réunion coordination",
+    "Validation contenu",
+  ],
+  Production: [
+    "Déplacement",
+    "Installation technique",
+    "Tournage / Captation",
+    "Coordination plateau",
+  ],
   "Post-production": ["Montage", "Habillage", "Validation finale"],
   Diffusion: ["Programmation", "Diffusion antenne", "Archivage"],
 };
@@ -122,7 +132,9 @@ interface AppState {
   login: (email: string) => void;
   logout: () => void;
 
-  addEmission: (e: Omit<Emission, "id" | "model" | "createdAt"> & { createdAt?: string }) => Emission;
+  addEmission: (
+    e: Omit<Emission, "id" | "model" | "createdAt"> & { createdAt?: string },
+  ) => Emission;
   updateEmission: (id: string, patch: Partial<Emission>) => void;
 
   addProduction: (p: Omit<Production, "id" | "code" | "createdAt">) => Production;
@@ -154,19 +166,125 @@ function buildBlocs(productionId: string): Bloc[] {
 
 // Seed data
 const seedEmissions: Emission[] = [
-  { id: "em_jt", title: "JT Al Aoula 20h30", category: "Journal Télévisé", model: "Modèle JT", responsable: "M. El Idrissi", createdAt: "2026-05-02", status: "Actif", description: "Journal télévisé quotidien — édition principale du soir.", priority: "Haute" },
-  { id: "em_sab", title: "Sabahiyat", category: "Magazine", model: "Modèle Magazine", responsable: "Mme Bennani", createdAt: "2026-05-04", status: "Actif", description: "Magazine matinal — actualités, société et culture.", priority: "Normale" },
-  { id: "em_amd", title: "Amouddou", category: "Documentaire", model: "Modèle Documentaire", responsable: "M. Tazi", createdAt: "2026-04-18", status: "Actif", description: "Série documentaire sur le patrimoine marocain.", priority: "Normale" },
-  { id: "em_lla", title: "Lalla Laaroussa", category: "Divertissement", model: "Modèle Divertissement", responsable: "Mme Alaoui", createdAt: "2026-03-21", status: "Actif", description: "Programme de divertissement familial.", priority: "Haute" },
-  { id: "em_mou", title: "Moubachara Maakoum", category: "Débat", model: "Modèle Débat", responsable: "M. Rahmouni", createdAt: "2026-05-10", status: "Actif", description: "Émission de débat en direct.", priority: "Critique" },
-  { id: "em_mac", title: "Macharif", category: "Programme culturel", model: "Modèle Culture", responsable: "Mme Chraïbi", createdAt: "2026-05-12", status: "Actif", description: "Magazine culturel hebdomadaire.", priority: "Normale" },
-  { id: "em_ram", title: "Programme spécial Ramadan", category: "Programme religieux", model: "Modèle Religieux", responsable: "M. Filali", createdAt: "2026-02-15", status: "Brouillon", description: "Grille spéciale du mois de Ramadan.", priority: "Haute" },
+  {
+    id: "em_jt",
+    title: "JT Al Aoula 20h30",
+    category: "Journal Télévisé",
+    model: "Modèle JT",
+    responsable: "M. El Idrissi",
+    createdAt: "2026-05-02",
+    status: "Actif",
+    description: "Journal télévisé quotidien — édition principale du soir.",
+    priority: "Haute",
+  },
+  {
+    id: "em_sab",
+    title: "Sabahiyat",
+    category: "Magazine",
+    model: "Modèle Magazine",
+    responsable: "Mme Bennani",
+    createdAt: "2026-05-04",
+    status: "Actif",
+    description: "Magazine matinal — actualités, société et culture.",
+    priority: "Normale",
+  },
+  {
+    id: "em_amd",
+    title: "Amouddou",
+    category: "Documentaire",
+    model: "Modèle Documentaire",
+    responsable: "M. Tazi",
+    createdAt: "2026-04-18",
+    status: "Actif",
+    description: "Série documentaire sur le patrimoine marocain.",
+    priority: "Normale",
+  },
+  {
+    id: "em_lla",
+    title: "Lalla Laaroussa",
+    category: "Divertissement",
+    model: "Modèle Divertissement",
+    responsable: "Mme Alaoui",
+    createdAt: "2026-03-21",
+    status: "Actif",
+    description: "Programme de divertissement familial.",
+    priority: "Haute",
+  },
+  {
+    id: "em_mou",
+    title: "Moubachara Maakoum",
+    category: "Débat",
+    model: "Modèle Débat",
+    responsable: "M. Rahmouni",
+    createdAt: "2026-05-10",
+    status: "Actif",
+    description: "Émission de débat en direct.",
+    priority: "Critique",
+  },
+  {
+    id: "em_mac",
+    title: "Macharif",
+    category: "Programme culturel",
+    model: "Modèle Culture",
+    responsable: "Mme Chraïbi",
+    createdAt: "2026-05-12",
+    status: "Actif",
+    description: "Magazine culturel hebdomadaire.",
+    priority: "Normale",
+  },
+  {
+    id: "em_ram",
+    title: "Programme spécial Ramadan",
+    category: "Programme religieux",
+    model: "Modèle Religieux",
+    responsable: "M. Filali",
+    createdAt: "2026-02-15",
+    status: "Brouillon",
+    description: "Grille spéciale du mois de Ramadan.",
+    priority: "Haute",
+  },
 ];
 
 const seedProds: Production[] = [
-  { id: "pr_jt_25", code: "P1-2605", name: "JT 20h30 — Édition 25 mai", emissionId: "em_jt", dateStart: "2026-05-25", dateEnd: "2026-05-25", lieu: "Studio A — SNRT Rabat", responsable: "M. El Idrissi", priority: "Haute", commentaire: "Édition principale", createdAt: "2026-05-20" },
-  { id: "pr_amd_03", code: "P2-2605", name: "Amouddou — Épisode Fès", emissionId: "em_amd", dateStart: "2026-05-28", dateEnd: "2026-06-02", lieu: "Médina de Fès", responsable: "M. Tazi", priority: "Normale", commentaire: "Tournage extérieur 4 jours", createdAt: "2026-05-15" },
-  { id: "pr_mou_12", code: "P3-2605", name: "Moubachara — Débat économique", emissionId: "em_mou", dateStart: "2026-05-27", dateEnd: "2026-05-27", lieu: "Plateau B", responsable: "M. Rahmouni", priority: "Critique", commentaire: "Direct 22h", createdAt: "2026-05-18" },
+  {
+    id: "pr_jt_25",
+    code: "P1-2605",
+    name: "JT 20h30 — Édition 25 mai",
+    emissionId: "em_jt",
+    dateStart: "2026-05-25",
+    dateEnd: "2026-05-25",
+    lieu: "Studio A — SNRT Rabat",
+    responsable: "M. El Idrissi",
+    priority: "Haute",
+    commentaire: "Édition principale",
+    createdAt: "2026-05-20",
+  },
+  {
+    id: "pr_amd_03",
+    code: "P2-2605",
+    name: "Amouddou — Épisode Fès",
+    emissionId: "em_amd",
+    dateStart: "2026-05-28",
+    dateEnd: "2026-06-02",
+    lieu: "Médina de Fès",
+    responsable: "M. Tazi",
+    priority: "Normale",
+    commentaire: "Tournage extérieur 4 jours",
+    createdAt: "2026-05-15",
+  },
+  {
+    id: "pr_mou_12",
+    code: "P3-2605",
+    name: "Moubachara — Débat économique",
+    emissionId: "em_mou",
+    dateStart: "2026-05-27",
+    dateEnd: "2026-05-27",
+    lieu: "Plateau B",
+    responsable: "M. Rahmouni",
+    priority: "Critique",
+    commentaire: "Direct 22h",
+    createdAt: "2026-05-18",
+  },
 ];
 
 const seedBlocs: Bloc[] = [
@@ -186,8 +304,36 @@ const seedBlocs: Bloc[] = [
 ];
 
 const seedDemandes: DemandeMM[] = [
-  { id: "mm_001", emissionId: "em_amd", productionId: "pr_amd_03", blocId: seedBlocs.find((b) => b.productionId === "pr_amd_03" && b.name === "Tournage / Captation")!.id, typeCouverture: "Reportage extérieur", date: "2026-05-28", heure: "08:00", lieu: "Médina de Fès", ressources: ["Régie mobile", "Équipe caméra", "Son"], justification: "Captation extérieure multi-caméras", status: "En attente", createdAt: "2026-05-19" },
-  { id: "mm_002", emissionId: "em_jt", productionId: "pr_jt_25", blocId: seedBlocs.find((b) => b.productionId === "pr_jt_25" && b.name === "Déplacement")!.id, typeCouverture: "Duplex direct", date: "2026-05-25", heure: "19:30", lieu: "Casablanca — Place Mohammed V", ressources: ["Fourgonnette", "Unité de transmission", "Équipe caméra"], justification: "Duplex pour ouverture JT", status: "Validée", createdAt: "2026-05-22" },
+  {
+    id: "mm_001",
+    emissionId: "em_amd",
+    productionId: "pr_amd_03",
+    blocId: seedBlocs.find(
+      (b) => b.productionId === "pr_amd_03" && b.name === "Tournage / Captation",
+    )!.id,
+    typeCouverture: "Reportage extérieur",
+    date: "2026-05-28",
+    heure: "08:00",
+    lieu: "Médina de Fès",
+    ressources: ["Régie mobile", "Équipe caméra", "Son"],
+    justification: "Captation extérieure multi-caméras",
+    status: "En attente",
+    createdAt: "2026-05-19",
+  },
+  {
+    id: "mm_002",
+    emissionId: "em_jt",
+    productionId: "pr_jt_25",
+    blocId: seedBlocs.find((b) => b.productionId === "pr_jt_25" && b.name === "Déplacement")!.id,
+    typeCouverture: "Duplex direct",
+    date: "2026-05-25",
+    heure: "19:30",
+    lieu: "Casablanca — Place Mohammed V",
+    ressources: ["Fourgonnette", "Unité de transmission", "Équipe caméra"],
+    justification: "Duplex pour ouverture JT",
+    status: "Validée",
+    createdAt: "2026-05-22",
+  },
 ];
 
 export const useApp = create<AppState>()(
@@ -223,7 +369,11 @@ export const useApp = create<AppState>()(
         set((s) => ({
           emissions: s.emissions.map((e) =>
             e.id === id
-              ? { ...e, ...patch, model: patch.category ? CATEGORY_TO_MODEL[patch.category] : e.model }
+              ? {
+                  ...e,
+                  ...patch,
+                  model: patch.category ? CATEGORY_TO_MODEL[patch.category] : e.model,
+                }
               : e,
           ),
         })),

@@ -69,7 +69,12 @@ export function AppLayout() {
           collapsed ? "w-[76px]" : "w-[252px]",
         )}
       >
-        <div className={cn("h-16 flex items-center border-b border-border", collapsed ? "justify-center" : "px-5")}>
+        <div
+          className={cn(
+            "h-16 flex items-center border-b border-border",
+            collapsed ? "justify-center" : "px-5",
+          )}
+        >
           {collapsed ? (
             <div className="h-9 w-9 rounded-lg bg-primary-soft flex items-center justify-center">
               <span className="font-bold text-[color:var(--brand-deep)]">m</span>
@@ -86,7 +91,8 @@ export function AppLayout() {
           )}
           {NAV.map((item) => {
             const Icon = item.icon;
-            const active = pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
+            const active =
+              pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
             return (
               <Link
                 key={item.to}
@@ -99,9 +105,18 @@ export function AppLayout() {
                   collapsed && "justify-center px-2",
                 )}
               >
-                <Icon className={cn("h-[18px] w-[18px] shrink-0", active ? "" : "text-muted-foreground group-hover:text-[color:var(--brand-deep)]")} />
+                <Icon
+                  className={cn(
+                    "h-[18px] w-[18px] shrink-0",
+                    active
+                      ? ""
+                      : "text-muted-foreground group-hover:text-[color:var(--brand-deep)]",
+                  )}
+                />
                 {!collapsed && <span>{item.label}</span>}
-                {!collapsed && active && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-white/80" />}
+                {!collapsed && active && (
+                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-white/80" />
+                )}
               </Link>
             );
           })}
@@ -111,7 +126,13 @@ export function AppLayout() {
             onClick={() => setCollapsed((c) => !c)}
             className="w-full flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors"
           >
-            {collapsed ? <ChevronsRight className="h-4 w-4" /> : (<><ChevronsLeft className="h-4 w-4" /> Réduire</>)}
+            {collapsed ? (
+              <ChevronsRight className="h-4 w-4" />
+            ) : (
+              <>
+                <ChevronsLeft className="h-4 w-4" /> Réduire
+              </>
+            )}
           </button>
         </div>
       </aside>
@@ -170,11 +191,17 @@ export function AppLayout() {
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-3 pl-2 pr-3 h-10 rounded-full hover:bg-accent/60 transition-colors">
                     <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[color:var(--brand-deep)] to-primary text-white grid place-items-center text-sm font-semibold">
-                      {user.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                      {user.name
+                        .split(" ")
+                        .map((w) => w[0])
+                        .slice(0, 2)
+                        .join("")}
                     </div>
                     <div className="hidden md:block text-left">
                       <div className="text-sm font-medium leading-tight">{user.name}</div>
-                      <div className="text-[11px] text-muted-foreground leading-tight">{user.service}</div>
+                      <div className="text-[11px] text-muted-foreground leading-tight">
+                        {user.service}
+                      </div>
                     </div>
                   </button>
                 </DropdownMenuTrigger>
@@ -191,7 +218,12 @@ export function AppLayout() {
                     <Settings className="h-4 w-4" /> Préférences
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => { logout(); navigate({ to: "/login" }); }}>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      logout();
+                      navigate({ to: "/login" });
+                    }}
+                  >
                     <LogOut className="h-4 w-4" /> Se déconnecter
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -223,10 +255,16 @@ export function PageHeader({
     <div className="mb-7 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
       <div>
         {eyebrow && (
-          <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">{eyebrow}</div>
+          <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+            {eyebrow}
+          </div>
         )}
-        <h1 className="text-2xl sm:text-[28px] font-bold text-[color:var(--brand-night)] tracking-tight">{title}</h1>
-        {description && <p className="mt-1.5 text-sm text-muted-foreground max-w-2xl">{description}</p>}
+        <h1 className="text-2xl sm:text-[28px] font-bold text-[color:var(--brand-night)] tracking-tight">
+          {title}
+        </h1>
+        {description && (
+          <p className="mt-1.5 text-sm text-muted-foreground max-w-2xl">{description}</p>
+        )}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
     </div>

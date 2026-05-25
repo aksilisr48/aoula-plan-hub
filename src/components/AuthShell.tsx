@@ -1,7 +1,15 @@
 import { AppLogo } from "./AppLogo";
 import loginVisual from "@/assets/login-visual.jpg";
 
-export function AuthShell({ children, title, subtitle }: { children: React.ReactNode; title: string; subtitle?: string }) {
+export function AuthShell({
+  children,
+  title,
+  subtitle,
+}: {
+  children: React.ReactNode;
+  title: string;
+  subtitle?: string;
+}) {
   return (
     <div className="min-h-screen bg-auth-gradient flex flex-col">
       <div className="flex-1 grid lg:grid-cols-[1.05fr_1fr]">
@@ -54,7 +62,8 @@ export function AuthShell({ children, title, subtitle }: { children: React.React
                   Planification des productions audiovisuelles
                 </h2>
                 <p className="mt-2 text-sm text-white/80 leading-relaxed">
-                  Centralisez les émissions, productions et moyens opérationnels dans un espace de travail structuré.
+                  Centralisez les émissions, productions et moyens opérationnels dans un espace de
+                  travail structuré.
                 </p>
               </div>
             </div>
@@ -69,11 +78,14 @@ export function AuthFooter() {
   return (
     <footer className="mt-10 border-t border-border/60 pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-muted-foreground">
       <div>
-        <span className="font-medium text-foreground/80">2026 © SNRT</span> — Société Nationale de Radiodiffusion et de Télévision
+        <span className="font-medium text-foreground/80">2026 © SNRT</span> — Société Nationale de
+        Radiodiffusion et de Télévision
       </div>
       <div className="flex items-center gap-4">
         <span>Tous Droits Réservés</span>
-        <a href="#" className="hover:text-primary">Mentions légales</a>
+        <a href="#" className="hover:text-primary">
+          Mentions légales
+        </a>
       </div>
     </footer>
   );

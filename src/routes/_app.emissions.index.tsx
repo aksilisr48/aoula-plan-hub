@@ -37,7 +37,9 @@ function EmissionsListPage() {
         description="Consultez et gérez l'ensemble des émissions diffusées sur Al Aoula. Chaque émission est associée automatiquement à un modèle de production."
         actions={
           <Link to="/emissions/new">
-            <Button className="gap-2 shadow-soft"><Plus className="h-4 w-4" /> Nouvelle émission</Button>
+            <Button className="gap-2 shadow-soft">
+              <Plus className="h-4 w-4" /> Nouvelle émission
+            </Button>
           </Link>
         }
       />
@@ -61,7 +63,9 @@ function EmissionsListPage() {
             <SelectContent>
               <SelectItem value="all">Toutes les catégories</SelectItem>
               {CATEGORIES.map((c) => (
-                <SelectItem key={c} value={c}>{c}</SelectItem>
+                <SelectItem key={c} value={c}>
+                  {c}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -84,23 +88,44 @@ function EmissionsListPage() {
             </thead>
             <tbody>
               {filtered.map((e) => (
-                <tr key={e.id} className="border-t border-border hover:bg-accent/30 transition-colors">
+                <tr
+                  key={e.id}
+                  className="border-t border-border hover:bg-accent/30 transition-colors"
+                >
                   <td className="py-3.5 px-5">
-                    <Link to="/emissions/$id" params={{ id: e.id }} className="flex items-center gap-3 group">
+                    <Link
+                      to="/emissions/$id"
+                      params={{ id: e.id }}
+                      className="flex items-center gap-3 group"
+                    >
                       <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary-soft to-accent grid place-items-center text-[color:var(--brand-deep)] font-semibold text-xs shrink-0">
-                        {e.title.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                        {e.title
+                          .split(" ")
+                          .map((w) => w[0])
+                          .slice(0, 2)
+                          .join("")}
                       </div>
                       <div>
-                        <div className="font-medium group-hover:text-primary transition-colors">{e.title}</div>
-                        <div className="text-xs text-muted-foreground line-clamp-1">{e.description}</div>
+                        <div className="font-medium group-hover:text-primary transition-colors">
+                          {e.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground line-clamp-1">
+                          {e.description}
+                        </div>
                       </div>
                     </Link>
                   </td>
-                  <td className="py-3.5 px-5"><span className="text-xs px-2 py-1 rounded-md bg-accent/60 text-[color:var(--brand-deep)] font-medium">{e.category}</span></td>
+                  <td className="py-3.5 px-5">
+                    <span className="text-xs px-2 py-1 rounded-md bg-accent/60 text-[color:var(--brand-deep)] font-medium">
+                      {e.category}
+                    </span>
+                  </td>
                   <td className="py-3.5 px-5 text-muted-foreground">{e.model}</td>
                   <td className="py-3.5 px-5 text-muted-foreground">{e.responsable}</td>
                   <td className="py-3.5 px-5 text-muted-foreground tabular-nums">{e.createdAt}</td>
-                  <td className="py-3.5 px-5"><StatusBadge value={e.status} /></td>
+                  <td className="py-3.5 px-5">
+                    <StatusBadge value={e.status} />
+                  </td>
                   <td className="py-3.5 px-5 text-right">
                     <button className="h-8 w-8 grid place-items-center rounded-md hover:bg-accent">
                       <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
@@ -112,7 +137,9 @@ function EmissionsListPage() {
                 <tr>
                   <td colSpan={7} className="py-16 text-center">
                     <Tv2 className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
-                    <div className="text-sm text-muted-foreground">Aucune émission ne correspond à votre recherche.</div>
+                    <div className="text-sm text-muted-foreground">
+                      Aucune émission ne correspond à votre recherche.
+                    </div>
                   </td>
                 </tr>
               )}
